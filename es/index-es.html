@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N4LINK - Documentación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-placeholder">
+                    <img src="../imgs/logos/logo-n4link.png" alt="N4LINK" class="logo-icon">
+                </div>
+            </a>
+
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2"
+                        fill="none" />
+                </svg>
+                <input type="text" class="search-input" placeholder="Buscar en la documentación..." id="search-input">
+                <div class="search-results" id="search-results"></div>
+            </div>
+
+            <div class="header-controls">
+                <button class="mobile-menu-button" onclick="toggleMobileMenu()" id="mobile-menu-button">
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+
+                <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                    <svg id="theme-icon" class="theme-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M20.354 15.354A9 9 0 718.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <div class="translator">
+                    <button class="translator-toggle" onclick="toggleTranslator()">
+                        <span class="fi fi-es" id="current-flag"></span>
+                        <span id="current-lang">ES</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="translator-dropdown" id="translator-dropdown">
+                        <div class="language-option" onclick="window.location.href='../index.html'">
+                            <span class="fi fi-br"></span>
+                            <span>Português (BR)</span>
+                        </div>
+                        <div class="language-option" onclick="window.location.href='../pt/index-pt.html'">
+                            <span class="fi fi-pt"></span>
+                            <span>Português (PT)</span>
+                        </div>
+                        <div class="language-option" onclick="window.location.href='../en/index-en.html'">
+                            <span class="fi fi-us"></span>
+                            <span>English</span>
+                        </div>
+                        <div class="language-option active">
+                            <span class="fi fi-es"></span>
+                            <span>Español</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb" id="breadcrumb">
+        <a href="#" class="breadcrumb-item" onclick="showSection('welcome')">Inicio</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-item active" id="breadcrumb-current">Bienvenido</span>
+    </nav>
+
+    <div class="translation-loading" id="translation-loading">
+        <div class="spinner"></div>
+        <span data-loading-text="Traduciendo...">Traduciendo...</span>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido a la Documentación N4LINK</h1>
+            <p>La plataforma N4LINK es un iPaaS (Integration Platform as a Service) que conecta sistemas legados y
+                modernos de forma ágil, segura y escalable.</p>
+        </div>
+    </section>
+
+    <div class="toc-container" id="toc-container">
+        <div class="toc-title">En esta sección</div>
+        <div id="toc-content"></div>
+    </div>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <nav id="mobile-nav-content"></nav>
+    </div>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo">
+                    <div class="logo-placeholder">
+                        <img src="../imgs/logos/logo-n4link.png" alt="N4LINK" class="logo-icon">
+                    </div>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-section">
+                    <h3>Inicio</h3>
+                    <ul class="nav-links">
+                        <li><button onclick="showSection('welcome')">Bienvenido</button></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Accesos / Estructura de navegación</h3>
+                    <ul class="nav-links">
+                        <li><button onclick="showSection('platform-access')">ACCESO A LA PLATAFORMA</button></li>
+                        <li><button onclick="showSection('navigation-structure')">ESTRUCTURA DE NAVEGACIÓN</button></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Funcionalidades de cada opción</h3>
+                    <ul class="nav-links">
+                        <li><button onclick="showSection('running-services')">SERVICIOS EN EJECUCIÓN</button></li>
+                        <li><button onclick="showSection('validate-communication')">VALIDAR COMUNICACIÓN</button></li>
+                        <li><button onclick="showSection('data-extractor')">EXTRACTOR DE DATOS</button></li>
+                        <li><button onclick="showSection('global-variables')">VARIABLES GLOBALES</button></li>
+                        <li><button onclick="showSection('notification-center')">CENTRO DE NOTIFICACIONES</button></li>
+                        <li><button onclick="showSection('file-upload')">CARGA DE ARCHIVOS</button></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Integraciones</h3>
+                    <ul class="nav-links">
+                        <li><button onclick="showSection('rest-form')">FORMULARIO REST</button></li>
+                        <li><button onclick="showSection('soap-form')">FORMULARIO SOAP</button></li>
+                        <li><button onclick="showSection('files-form')">FORMULARIO ARCHIVOS</button></li>
+                        <li><button onclick="showSection('database-form')">FORMULARIO BASE DE DATOS</button></li>
+                        <li><button onclick="showSection('sap-form')">FORMULARIO SAP RFC/BAPI</button></li>
+                        <li><button onclick="showSection('rest-mapping')">MAPEO DE ATRIBUTOS DESTINO REST</button></li>
+                        <li><button onclick="showSection('database-body')">ESTRUCTURA DE BODY DESTINO BASE DE
+                                DATOS</button></li>
+                        <li><button onclick="showSection('soap-body')">ESTRUCTURA DE BODY DESTINO SOAP</button></li>
+                        <li><button onclick="showSection('rfc-body')">ESTRUCTURA DE BODY DESTINO RFC</button></li>
+                        <li><button onclick="showSection('scheduling')">CONFIGURACIÓN DE PROGRAMACIÓN</button></li>
+                        <li><button onclick="showSection('webhook')">API OYENTE (WEBHOOK)</button></li>
+                        <li><button onclick="showSection('parent-connector')">CONCEPTO CONECTOR PADRE</button></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section id="welcome" class="content-section active">
+                <h1>Bienvenido a la Documentación N4LINK</h1>
+                <p>La plataforma <strong>N4LINK</strong> es un iPaaS (Integration Platform as a Service) que conecta
+                    sistemas legados y modernos de forma ágil, segura y escalable.</p>
+
+                <h2>Sistemas ya integrados</h2>
+
+                <div class="companies-grid">
+                    <div class="company-logo" data-company="VTEX">
+                        <img src="../imgs/logos/vtex.png" alt="VTEX">
+                    </div>
+                    <div class="company-logo" data-company="SAP">
+                        <img src="../imgs/logos/sap.png" alt="SAP">
+                    </div>
+                    <div class="company-logo" data-company="TOTVS">
+                        <img src="../imgs/logos/totvs-novo.png" alt="TOTVS">
+                    </div>
+                    <div class="company-logo" data-company="Salesforce">
+                        <img src="../imgs/logos/salesforce.png" alt="Salesforce">
+                    </div>
+                    <div class="company-logo" data-company="RD Station">
+                        <img src="../imgs/logos/rdstation.png" alt="RD Station">
+                    </div>
+                    <div class="company-logo" data-company="PagSeguro">
+                        <img src="../imgs/logos/pagseguro-novo.png" alt="PagSeguro">
+                    </div>
+                    <div class="company-logo" data-company="Oracle">
+                        <img src="../imgs/logos/oracle.png" alt="Oracle">
+                    </div>
+                    <div class="company-logo" data-company="SAP B1">
+                        <img src="../imgs/logos/sapb1.png" alt="SAP B1">
+                    </div>
+                    <div class="company-logo" data-company="RD Station Marketing">
+                        <img src="../imgs/logos/rdstation-mkt.png" alt="RD Station Marketing">
+                    </div>
+                    <div class="company-logo" data-company="Manusis4">
+                        <img src="../imgs/logos/manusis.png" alt="Manusis4">
+                    </div>
+                    <div class="company-logo" data-company="Copastur">
+                        <img src="../imgs/logos/copastur.png" alt="Copastur">
+                    </div>
+                    <div class="company-logo" data-company="VExpenses">
+                        <img src="../imgs/logos/vexpenses.png" alt="VExpenses">
+                    </div>
+                    <div class="company-logo" data-company="Stuo">
+                        <img src="../imgs/logos/stuo.png" alt="Stuo">
+                    </div>
+                    <div class="company-logo" data-company="BTG">
+                        <img src="../imgs/logos/btg.png" alt="BTG">
+                    </div>
+                    <div class="company-logo" data-company="Infracommerce">
+                        <img src="../imgs/logos/infrapay.png" alt="Infracommerce">
+                    </div>
+                    <div class="company-logo" data-company="Lognex">
+                        <img src="../imgs/logos/lognex.png" alt="Lognex">
+                    </div>
+                    <div class="company-logo" data-company="Senior">
+                        <img src="../imgs/logos/senior.png" alt="Senior">
+                    </div>
+                    <div class="company-logo" data-company="DocuSign">
+                        <img src="../imgs/logos/docusign.png" alt="DocuSign">
+                    </div>
+                    <div class="company-logo" data-company="DB2">
+                        <img src="../imgs/logos/db2.png" alt="DB2">
+                    </div>
+                    <div class="company-logo" data-company="Firebird">
+                        <img src="../imgs/logos/firebird.png" alt="Firebird">
+                    </div>
+                    <div class="company-logo" data-company="Mercado Eletrônico">
+                        <img src="../imgs/logos/mercado-eletronico.png" alt="Mercado Electrónico">
+                    </div>
+                    <div class="company-logo" data-company="MySQL">
+                        <img src="../imgs/logos/mysql.png" alt="MySQL">
+                    </div>
+                    <div class="company-logo" data-company="Oracle Logo">
+                        <img src="../imgs/logos/oracle-logo.png" alt="Oracle Logo">
+                    </div>
+                    <div class="company-logo" data-company="PostgreSQL">
+                        <img src="../imgs/logos/postgresql.png" alt="PostgreSQL">
+                    </div>
+                    <div class="company-logo" data-company="SQL Server">
+                        <img src="../imgs/logos/sqlserver-logo.png" alt="SQL Server">
+                    </div>
+                    <div class="company-logo" data-company="TOTVS Datasul">
+                        <img src="../imgs/logos/totvs-datasul.png" alt="TOTVS Datasul">
+                    </div>
+                    <div class="company-logo" data-company="TOTVS Protheus">
+                        <img src="../imgs/logos/totvs-protheus.png" alt="TOTVS Protheus">
+                    </div>
+                    <div class="company-logo" data-company="TOTVS RM">
+                        <img src="../imgs/logos/totvs-rm.png" alt="TOTVS RM">
+                    </div>
+                    <div class="company-logo" data-company="Astrein">
+                        <img src="../imgs/logos/astrein.png" alt="Astrein">
+                    </div>
+                    <div class="company-logo" data-company="Bitrix24">
+                        <img src="../imgs/logos/bitrix.png" alt="Bitrix24">
+                    </div>
+                    <div class="company-logo" data-company="Nimbi">
+                        <img src="../imgs/logos/nimbi.png" alt="Nimbi">
+                    </div>
+                    <div class="company-logo" data-company="Paradigma">
+                        <img src="../imgs/logos/paradigma.png" alt="Paradigma">
+                    </div>
+                    <div class="company-logo" data-company="Siscomex">
+                        <img src="../imgs/logos/siscomex.png" alt="Siscomex">
+                    </div>
+                    <div class="company-logo" data-company="Zanthus">
+                        <img src="../imgs/logos/zanthus.png" alt="Zanthus">
+                    </div>
+                </div>
+            </section>
+
+            <section id="platform-access" class="content-section">
+                <h2>Acceso a la Plataforma</h2>
+                <p>Para acceder a la plataforma N4LINK simplemente use la URL: <a href="https://go.n4s-hip.com/signin"
+                        target="_blank">https://go.n4s-hip.com/signin</a>, ingrese su correo electrónico y contraseña
+                    proporcionados por nuestro equipo:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/login.png" alt="Pantalla de Login N4LINK"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+
+                <p>Nuestra plataforma requiere el uso de MFA. En el primer acceso, será dirigido a la pantalla de
+                    lectura del QRCODE, donde podrá utilizar la aplicación de su preferencia (Google Authenticator,
+                    Microsoft Authenticator, etc).</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/qrcode.png" alt="QR Code para configuración MFA"
+                        style="width: 100%; max-width: 600px; height: auto;">
+                </div>
+
+                <p>Después de leer el QRCODE, haga clic en el botón <strong>"Continuar"</strong> para ser dirigido a la
+                    pantalla de ingreso del código MFA:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/mfa.png" alt="Pantalla de inserción del código MFA"
+                        style="width: 100%; max-width: 600px; height: auto;">
+                </div>
+
+                <p>Si todo está correcto, será dirigido a la página inicial de la plataforma:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/home.png" alt="Dashboard principal de la plataforma N4LINK"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="navigation-structure" class="content-section">
+                <h2>Estructura de Navegación</h2>
+                <p>Nuestra estructura de navegación se basa en el menú que está en el lateral izquierdo, donde cada
+                    opción define cuál será el tipo de tecnología utilizada en la solicitud del origen. El registro de
+                    servicios sería origen REST, registro de base de datos sería origen base de datos, registro de SOAP
+                    sería origen SOAP, registro de archivos sería origen lectura de un FTP/SFTP de cualquier tipo de
+                    archivo (TXT, CSV, XML...), Registro de SAP-RFC sería para origen RFC's o BAPI's específicas del
+                    mundo SAP.</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/integracoes.png" alt="Módulos de Integraciones"
+                        style="width: 100%; max-width: 400px; height: auto;">
+                </div>
+
+                <h3>SERVICIOS EN EJECUCIÓN:</h3>
+                <p>En el menú Panel de Control en la opción Servicios en Ejecución, tendrá acceso a todas las colas
+                    activas y cada conector en nuestra plataforma posee su cola propia. Es decir, habrá una cola para
+                    cada tema con opción de "PARAR" la cola, "REINICIAR", o incluso "ELIMINAR" mensajes.</p>
+
+                <h3>VALIDAR COMUNICACIÓN:</h3>
+                <p>Sirve como un facilitador para que la plataforma pruebe vía TELNET la comunicación con la URL
+                    proporcionada.</p>
+
+                <h3>EXTRACTOR DE DATOS:</h3>
+                <p>Herramienta similar al estudio SQL. Aquí es posible ejecutar sintaxis en su base de datos, si es su
+                    modelo y exportar a un excel o incluso validar la sintaxis de las consultas.</p>
+
+                <h3>VARIABLES GLOBALES:</h3>
+                <p>Es una forma de registrar contenidos, sea para no dejar expuesto en el conector o incluso facilitar
+                    construcciones utilizando estas variables sin tener que repetir contenidos.</p>
+
+                <h3>CENTRO DE NOTIFICACIONES:</h3>
+                <p>Crea alertas de manera activa, es decir, la plataforma envía un correo electrónico de acuerdo con lo
+                    que fue configurado. Ejemplo: Desea crear una alerta para que siempre que la respuesta del destino
+                    regrese ERROR 500, sea enviado automáticamente un correo electrónico al departamento de TI.</p>
+
+                <h3>CARGA DE ARCHIVOS:</h3>
+                <p>Hacer cargas de archivos csv, txt en una tabla del N4LINK, con posibilidad de acceder a los
+                    contenidos por los conectores. Ejemplo: Para generar las ventas del e-commerce para el ERP es
+                    obligatorio el registro específico, pero los datos no son transmitidos del e-commerce, pero con esta
+                    función, es posible crear una regla a partir de un campo del e-commerce para una planilla de Excel y
+                    determinar el contenido correcto para enviar al ERP.</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/painel.png" alt="Panel de Control"
+                        style="width: 100%; max-width: 400px; height: auto;">
+                </div>
+            </section>
+
+            <section id="running-services" class="content-section">
+                <h2>Servicios En Ejecución</h2>
+                <p>Aquí conforme reportado anteriormente, son las colas activas en nuestra plataforma, donde se muestra
+                    el ID del conector después del guión en la columna COLA:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/servicos.png" alt="Tabla de Servicios en Ejecución"
+                        style="width: 100%; max-width: 900px; height: auto;">
+                </div>
+
+                <p>En esta opción, es posible verificar las colas activas en la plataforma N4LINK, donde se muestra el
+                    ID del conector después del guión en la columna COLA.</p>
+
+                <p><strong>COLUMNA COLA:</strong><br>Se muestra su código de empresa en la plataforma N4LINK + ID del
+                    conector.</p>
+
+                <p><strong>COLUMNA EMPRESA:</strong><br>Se muestra el nombre de empresa registrado.</p>
+
+                <p><strong>COLUMNA ESTADO:</strong><br>Indica la situación actual de la cola:</p>
+                <ul>
+                    <li>VERDE indica que está en ejecución;</li>
+                    <li>AMARILLO indica que está en proceso de parar/reiniciar;</li>
+                    <li>ROJO indica que está parada.</li>
+                </ul>
+
+                <p><strong>COLUMNA ACCIONES:</strong></p>
+                <ul>
+                    <li>BOTÓN DELETE - elimina los mensajes de la cola, en la secuencia ya para la cola y la sube
+                        nuevamente</li>
+                    <li>BOTÓN PURGE - elimina los mensajes actuales de la cola</li>
+                    <li>Botón rojo (-) es el botón que para la cola</li>
+                    <li>Botón de RESTART - azul con dos flechas, una de encuentro a la otra - sirve para parar y subir
+                        nuevamente la cola</li>
+                    <li>Botón PLAY - verde - inicia la cola que está parada</li>
+                </ul>
+            </section>
+
+            <section id="validate-communication" class="content-section">
+                <h2>Validar Comunicación</h2>
+                <p>En esta pantalla puede validar si la dirección de origen (N4LINK) que puede ser probada como
+                    localhost, o si es una dirección más específica puede hablar con nuestro soporte para saber en
+                    específico cuál es la dirección LAN de la máquina que sus conectores están ejecutando, posee
+                    comunicación con otra dirección y puerto, es decir, se ejecuta un TELNET para demostrar si la
+                    comunicación está funcional, Ejemplo comunicación con Google:</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/telnet.png" alt="Interfaz de Validación de Comunicación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <img src="../imgs/telas_n4link/telnet2.png" alt="Interfaz de Validación de Comunicación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="data-extractor" class="content-section">
+                <h2>Extractor de Datos</h2>
+                <p>Configure su acceso con una base de datos en la cual nuestra plataforma posee conexión y ejecute
+                    consultas SQL o incluso, procedimientos para verificar si la sintaxis está funcional. Aún es posible
+                    extraer el resultado presentado para una planilla de Excel.
+
+                    En la opción de DRIVER, seleccione cuál es la base de datos. En URL existe el IP/Dirección que la
+                    base de datos está siendo ejecutada; PUERTO - cuál el puerto en que se encuentra la base de datos;
+                    USUARIO - haga el login que tiene acceso a la base de datos; CONTRASEÑA - ingrese la contraseña del
+                    login utilizado; BASE DE DATOS - ingrese el nombre de la base de datos a ser leída; SCHEMA - ingrese
+                    el schema, si es el caso.
+
+                    Ejemplo:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/extrator.png" alt="Interfaz del Extractor de Datos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <img src="../imgs/telas_n4link/extrator2.png" alt="Interfaz del Extractor de Datos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <img src="../imgs/telas_n4link/extrator3.png" alt="Interfaz del Extractor de Datos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="global-variables" class="content-section">
+                <h2>Variables Globales</h2>
+                <p>Panel donde solamente los perfiles configurados como ADMINISTRADOR poseen acceso, es decir, puede
+                    crear variables que contienen datos para autenticación como ejemplo y compartir con quien vaya a
+                    crear los conectores solamente los nombres de las variables, blindando así, el contenido. Este
+                    proceso contribuye mucho para la productividad, pues no es necesario repetir contenidos en sus
+                    creaciones de Conectores.
+
+                    Pantalla que presenta su empresa y cuántas variables creadas posee:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/variaveis.png" alt="Interfaz de Variables Globales"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Nuevo registro de variable:</p>
+
+                    <img src="../imgs/telas_n4link/variaveis1.png" alt="Interfaz de Variables Globales"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="notification-center" class="content-section">
+                <h2>Centro de Notificaciones</h2>
+                <p>Central para configuración de alertas de manera activa vía correo electrónico. Es posible crear
+                    reglas específicas para cuando la condición sea válida y disparar un correo electrónico para el
+                    responsable del análisis del error.
+
+                    Pantalla inicial que presenta su empresa y cuántas alertas tiene registradas:</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/central.png" alt="Centro de Notificaciones"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Pantalla para creación de una nueva alerta:</p>
+                    <img src="../imgs/telas_n4link/central1.png" alt="Centro de Notificaciones"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Ejemplo de creación de la estructura del correo electrónico, donde el contenido '{{destiny}}' es
+                        una variable global de la plataforma N4LINK que almacena toda la respuesta del destino.</p>
+                    <img src="../imgs/telas_n4link/central2.png" alt="Centro de Notificaciones"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="file-upload" class="content-section">
+                <h2>Carga de Archivos</h2>
+                <p>En esta interfaz, es posible subir archivos para utilizar los contenidos en sus conectores, sea para
+                    enriquecer o validar un dato. Esto es, tener datos en la plataforma donde ninguna de las puntas
+                    integradas conseguiría informar.
+
+                    Pantalla que presenta cuántos archivos subió para su empresa:</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/upload.png" alt="Interfaz de Carga de Archivos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Pantalla para configuración de carga de un nuevo archivo.
+
+                        Seleccione el tipo (en el ejemplo abajo: CSV);
+                        Cuál el delimitador de contenidos (en el ejemplo: punto y coma (;));
+                        Seleccione el archivo que quiere hacer carga (en el ejemplo: convert.csv);
+                        Guarde para confirmar la carga.</p>
+
+                    <img src="../imgs/telas_n4link/upload1.png" alt="Interfaz de Carga de Archivos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="rest-form" class="content-section">
+                <h2>Integración vía REST</h2>
+                <p>Para la configuración de integraciones con origen REST, menú Integraciones - Registro de servicios
+                    tendrá como pantalla inicial:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/rest.png" alt="Formulario REST"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Para los conectores ya creados, visualizará: Botones de LOG responsables de almacenar todos los
+                        datos de una transacción ejecutada; Botón VIEW - presenta datos que fueron almacenados en una
+                        tabla intermedia, concepto utilizado cuando normalmente en el sistema de origen no es posible
+                        controlar lo que ya fue integrado para ser reenviado o no; Botón LAYOUT - almacena toda la
+                        configuración del conector; Botón CONTROL DE VERSIONES - botón gris al lado del botón LAYOUT;
+                        Botón de COPIA - es un facilitador. En este ítem, es posible reutilizar configuraciones de un
+                        conector ya producido; Botón PLAY - es utilizado para disparar la integración de manera
+                        inmediata.
+
+                        En la configuración del conector, sea uno nuevo o alteración de uno existente, el llenado del
+                        formulario REST es semejante a las herramientas de uso para prueba de API's del mercado. Un
+                        ejemplo práctico es POSTMAN, se selecciona si debe ser verificado el certificado de la dirección
+                        a ser consumida o no, el VERBO a ser utilizado, URL, Endpoint. Caso sea una API paginada, cuál
+                        es
+                        el concepto de paginación; caso tenga autorización, cuál el tipo utilizado, y los datos del
+                        HEADER, que es dinámico y puede ser insertado cuantos sean necesarios por el botón de agregar
+                        (+).</p>
+
+                    <img src="../imgs/telas_n4link/rest1.png" alt="Formulario REST"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="soap-form" class="content-section">
+                <h2>Integración vía SOAP</h2>
+                <p>Para la configuración de integraciones con origen SOAP, menú Integraciones - Registro de SOAP,
+                    aparecerá como pantalla inicial:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/soap.png" alt="Formulario SOAP"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Para los conectores ya creados visualizará: Botones de LOG - responsables de almacenar todos los
+                        datos de una transacción ejecutada; Botón VIEW - presenta datos que fueron almacenados en una
+                        tabla intermedia, concepto utilizado cuando normalmente en el sistema de origen no es posible
+                        controlar lo que ya fue integrado para ser reenviado o no; Botón LAYOUT - almacena toda la
+                        configuración del conector. Botón CONTROL DE VERSIONES - botón gris al lado del botón LAYOUT;
+                        Botón de COPIA - es un facilitador. En este ítem, es posible reutilizar configuraciones de un
+                        conector ya producido; Botón PLAY - es utilizado para disparar la integración de manera
+                        inmediata.
+
+                        En la configuración del conector, sea uno nuevo o alteración de uno existente, el llenado del
+                        formulario SOAP es muy semejante a herramientas de uso para prueba de API's del mercado. Por
+                        ejemplo SOAPUI, se selecciona lo que debe ser verificado, el certificado de la dirección a ser
+                        consumida o no, inserta el WSDL que contiene los métodos. Caso sea una API paginada, cuál el
+                        concepto de paginación, si existe autorización cuál el tipo utilizado, y los datos del HEADER,
+                        que es dinámico y puede ser insertado cuantos sean necesarios por el botón de agregar (+).</p>
+
+                    <img src="../imgs/telas_n4link/soap1.png" alt="Formulario SOAP"
+                        style="width: 100%; max-width: 800px; height: auto;">
+
+                    <img src="../imgs/telas_n4link/soap2.png" alt="Formulario SOAP"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="files-form" class="content-section">
+                <h2>Integración vía Archivos</h2>
+                <p>Para la configuración de integraciones con origen FTP/SFTP para lectura de archivos, menú
+                    Integraciones - Registro de base de datos tendrá como pantalla inicial:</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/file.png" alt="Formulario de Archivos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>donde para los conectores ya creados encuentra los botones de LOG responsable de almacenar todos
+                        los datos de una transacción ejecutada, botón LAYOUT que almacena toda la configuración del
+                        conector, botón CONTROL DE VERSIONES que sería el botón gris al lado del botón layout, botón de
+                        COPIA que es un facilitador caso tenga como reutilizar las cosas de un conector ya hecho y el
+                        botón PLAY que es utilizado para disparar la integración de manera inmediata.
+
+                        En la configuración del conector sea uno nuevo o alteración de uno existente, el llenado del
+                        formulario para conectar y recolectar datos en la base de datos es muy parecido con herramientas
+                        de uso para conexiones en FTP/SFTP, coloca en la URL la DIRECCIÓN:PUERTO y al frente quebrando
+                        por barras si es el caso la navegación entre las carpetas, en el Ejemplo abajo después de logear
+                        y estar en la raíz del FTP estoy indicando para ir hasta la carpeta TESTE. Fuera de la parte de
+                        la conexión define como va a ser la quiebra de los archivos de la carpeta seleccionada, en el
+                        caso de nuestra prueba son todos archivos CSV quebrados por punto y coma (;).
+
+                        Aún tenemos en este sector un condicional para ignorar las líneas del archivo, sea para saltar
+                        el
+                        encabezado del archivo por Ejemplo o incluso descartar líneas basado en reglas, en el Ejemplo
+                        abajo estamos descartando todo lo que en la primera columna del archivo tenga el texto ORIGEM o
+                        DATA.</p>
+
+                    <img src="../imgs/telas_n4link/file1.png" alt="Formulario de Archivos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Ya para la sección de conversión de parámetros tenemos el tratamiento del dato en sí, donde
+                        indicamos cuál es la columna de origen y cuál el nombre del atributo que la API REST de destino
+                        va a recibir, ese mapeo puede ser del tipo Función donde se habilita un libro para inserción de
+                        funciones en javascript, un dato fijado sea de tipo TEXTO, NÚMERO o LÓGICO, o dinámico donde se
+                        toma exactamente el contenido del origen y se envía para el destino en el atributo configurado,
+                        entonces en el Ejemplo abajo tenemos la columna 14 yendo para el atributo taxIdTo en el destino,
+                        ya para la columna 7 que va para el atributo amount tenemos una función en javascript debido a
+                        ser un tratamiento más complejo del dato, transformar correctamente las unidades de millar,
+                        decena... Después transformar en el tipo FLOAT.</p>
+
+                    <img src="../imgs/telas_n4link/file2.png" alt="Formulario de Archivos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <img src="../imgs/telas_n4link/file3.png" alt="Formulario de Archivos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="database-form" class="content-section">
+                <h2>Integración vía Base de Datos</h2>
+                <p>Para la configuración de integraciones con origen BASE DE DATOS, menú Integraciones - Registro de
+                    base de datos tendrá como pantalla inicial:</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/banco.png" alt="Formulario Base de Datos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>donde para los conectores ya creados encuentra los botones de LOG responsable de almacenar todos
+                        los datos de una transacción ejecutada, botón LAYOUT que almacena toda la configuración del
+                        conector, botón CONTROL DE VERSIONES que sería el botón gris al lado del botón layout, botón de
+                        COPIA que es un facilitador caso tenga como reutilizar las cosas de un conector ya hecho y el
+                        botón PLAY que es utilizado para disparar la integración de manera inmediata.
+
+                        En la configuración del conector sea uno nuevo o alteración de uno existente, el llenado del
+                        formulario para conectar y recolectar datos en la base de datos es muy parecido con herramientas
+                        de uso para conexiones vía JDBC de mercado, como por Ejemplo el DBEAVER, selecciona cuál es la
+                        base de datos que va a utilizar en el Ejemplo abajo SQL SERVER, URL, puerto, usuario y
+                        contraseña, y el SCHEMA solamente si es necesario, en el campo QUERY inserta su sintaxis sea una
+                        consulta, un procedimiento, en el Ejemplo abajo estoy armando un SELECT</p>
+
+                    <img src="../imgs/telas_n4link/banco1.png" alt="Formulario Base de Datos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="sap-form" class="content-section">
+                <h2>Integración vía SAP RFC/BAPI</h2>
+                <p>Para la configuración de integraciones con origen SAP ECC, menú Integraciones - Registro de SAP-RFC
+                    tendrá como pantalla inicial:</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/sap.png" alt="Formulario SAP RFC/BAPI"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>donde para los conectores ya creados encuentra los botones de LOG responsable de almacenar todos
+                        los datos de una transacción ejecutada, botón LAYOUT que almacena toda la configuración del
+                        conector, botón CONTROL DE VERSIONES que sería el botón gris al lado del botón layout, botón de
+                        COPIA que es un facilitador caso tenga como reutilizar las cosas de un conector ya hecho y el
+                        botón PLAY que es utilizado para disparar la integración de manera inmediata.
+
+                        En la configuración del conector sea uno nuevo o alteración de uno existente, el llenado del
+                        formulario para conectar es muy parecido con el llenado de los datos en el SAP LOGON GUI, donde
+                        llena el servidor de aplicación, si es SAP-ROUTER la URL del router, usuario, contraseña ID del
+                        sistema, número de la instancia, cliente e idioma. Después de los datos de conexión informa cuál
+                        es la RFC o BAPI a ser consumida, en el Ejemplo abajo es una RFC customizada llamada
+                        CADASTRO_MATERIAIS, en los parámetros de entrada informa los parámetros que la RFC/BAPI espera,
+                        en el Ejemplo abajo tenemos los parámetros fecha de (IM_LAEDA_DE) y el fecha hasta
+                        (IM_LAEDA_ATE)</p>
+
+                    <img src="../imgs/telas_n4link/sap1.png" alt="Formulario SAP RFC/BAPI"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="rest-mapping" class="content-section">
+                <h2>Mapeo de Atributos Destino REST</h2>
+                <p>Siempre que el Destino sea REST, independiente de la tecnología del origen (BASE DE DATOS, SOAP,
+                    ARCHIVO, SAP RFC/BAPI), va a existir en la página el conversor de parámetros. En la primera columna
+                    es posible configurar determinados atributos para popular la tabla intermedia de la plataforma y
+                    hacer el descarte caso retorne.
+
+                    En la segunda columna se puntúa el tipo del MAPEO. Puede ser: DINÁMICO - modelo que utiliza el
+                    contenido del origen y lo envía para el destino. En el ejemplo se está utilizando el contenido del
+                    atributo MATNR que está llegando y enviando para el atributo CODE en el destino. FIJO - puede ser un
+                    texto, un número o lógico. El ejemplo está fijando el contenido TRUE como dato lógico para mandar en
+                    el atributo is_integration, incluso una función. Vea en el ejemplo el atributo IS_ACTIVE que
+                    habilita
+                    un libro arriba para que pueda ser creada su función en javascript.</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/depararest.png" alt="Interfaz Mapeo REST"
+                        style="width: 100%; max-width: 800px; height: auto;">
+
+                    <p>Cuando se utiliza el concepto de función al entrar en el editor (botón del libro) se muestra una
+                        pantalla para crear la función. En esta pantalla es posible utilizar variables globales de la
+                        plataforma para captar contenidos: Variable record - almacena los datos que regresaron de la
+                        solicitud del formulario origen; Detail - almacena el contenido de la solicitud del formulario
+                        detalle; Parent - almacena el contenido que llega del conector PADRE; Caso este concepto sea
+                        utilizado, uploadedFiles almacena archivos en csv que fueron subidos para la empresa. ejemplo
+                        abajo se hace un if simple donde caso exista en el origen el atributo LVORM, será retornado.
+                        Caso contrario, fijamos el retorno TRUE.</p>
+
+                    <img src="../imgs/telas_n4link/depararest1.png" alt="Interfaz Mapeo REST"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="database-body" class="content-section">
+                <h2>Estructura de Body Destino Base de Datos</h2>
+                <p>Cuando el destino es base de datos es posible utilizar el concepto de dos llaves: abriendo y cerrando
+                    informando el nombre de atributo que llegó en el origen a ser utilizado. A partir de ahí, es posible
+                    estructurar su procedimiento de manera completa (INSERT, SELECT, UPDATE, etc) y donde desee cambiar
+                    los contenidos de acuerdo con los atributos que llegan en el origen.
+
+                    En el ejemplo abajo estamos llamando un procedimiento BDIPIERPROD donde en el parámetro CodBarras
+                    está siendo utilizado el contenido del atributo CODBARRAS que llega del origen REST.</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/bodybanco.png" alt="Estructura Body Base de Datos"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="soap-body" class="content-section">
+                <h2>Estructura de Body Destino SOAP</h2>
+                <p>Cuando el destino es SOAP es posible utilizar el concepto de dos llaves: abriendo y cerrando
+                    informando el nombre de atributo que llegó en el origen a ser utilizado. En el ejemplo abajo hay el
+                    {{codigoCfo}} o también, es posible utilizar el concepto de dos corchetes, en el cual el contenido
+                    entre ellos es una sintaxis en javascript.
+
+                    Ejemplo: tag NOMEFANTASIA está retornando lo que llega de la solicitud del origen (variable record)
+                    tomando el atributo firstName que está dentro del objeto clientProfileData.</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/bodysoap.png" alt="Estructura Body SOAP"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <img src="../imgs/telas_n4link/bodysoap2.png" alt="Estructura Body SOAP"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="rfc-body" class="content-section">
+                <h2>Estructura de Body Destino RFC</h2>
+                <p>Cuando el destino es base de datos es posible utilizar el concepto de dos llaves: abriendo y cerrando
+                    informando el nombre de atributo que llegó en el origen a ser utilizado. A partir de ahí, es posible
+                    estructurar su procedimiento de manera completa (INSERT, SELECT, UPDATE, etc) y donde desee cambiar
+                    los contenidos de acuerdo con los atributos que llegan en el origen.
+
+                    En el ejemplo abajo estamos llamando un procedimiento BDIPIERPROD donde en el parámetro CodBarras
+                    está siendo utilizado el contenido del atributo CODBARRAS que llega del origen REST.</p>
+
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/bodybanco.png" alt="Estructura Body RFC"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="scheduling" class="content-section">
+                <h2>Configuración de Programación</h2>
+                <p>Para programación, hay las opciones de recurrencia, divididos por hora, minuto o segundos:</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/agendamento.png" alt="Interfaz de Programación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Ejecución diaria - se informa un horario para ejecución:</p>
+                    <img src="../imgs/telas_n4link/agendamento1.png" alt="Interfaz de Programación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Programación semanal - puntúa uno o más días de la semana y cuál horario ejecutar:</p>
+                    <img src="../imgs/telas_n4link/agendamento2.png" alt="Interfaz de Programación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Programación mensual - informa apenas un día del mes para ejecución y cuál el horario:</p>
+                    <img src="../imgs/telas_n4link/agendamento3.png" alt="Interfaz de Programación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>Programación del tipo RANGO - informa un rango de horas del día para la ejecución y de cuánto en
+                        cuánto tiempo. En el ejemplo abajo fue configurado para ejecutar de la media noche hasta las
+                        seis de la mañana, con un disparo a cada 30 minutos.</p>
+                    <img src="../imgs/telas_n4link/agendamento4.png" alt="Interfaz de Programación"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="webhook" class="content-section">
+                <h2>API Oyente (Webhook)</h2>
+                <p>Es posible configurar el conector para ser receptivo, en el cual, en el encabezado es posible
+                    informar
+                    que es un conector oyente y configurar un nombre de método a ser externalizado.
+
+                    La URL y el token son únicos para cada cliente y son informados por nuestro equipo en el momento de
+                    la creación del registro de la Empresa para liberación de uso en la plataforma.</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/ouvinte.png" alt="Configuración de Webhook"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                    <p>En el ejemplo abajo la empresa N4LINK posee la URL: https://go.n4s-hip.com/public/23/ como base.
+                        Después de la última barra vendrá el método que será configurado como oyente.
+
+                        Ejemplo: Fue creado el conector abajo exponiendo el método /meuWebhook donde la plataforma está
+                        externalizando un verbo POST que irá a recibir un body de alguien que esté solicitándola. A
+                        partir
+                        del recibimiento de ese body es posible dar secuencia en otras actividades en el mismo modelo
+                        cuando es la plataforma que está solicitando.
+
+                        Ejemplo de URL y TOKEN disponibilizado por nuestro equipo:</p>
+                    <img src="../imgs/telas_n4link/ouvinte1.png" alt="Configuración de Webhook"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+            <section id="parent-connector" class="content-section">
+                <h2>Concepto Conector Padre</h2>
+                <p>Existe la posibilidad de encadenar conectores para enriquecimiento de datos o incluso por cuestión de
+                    secuencia lógica.
+
+                    Ejemplo: Su empresa está integrando pedidos de un ecommerce. Obligatoriamente, antes de bajar el
+                    pedido es necesario registrar el cliente. Aquí, podría ser configurado para el conector de pedidos
+                    llamar el conector de clientes primeramente y solo después de ese proceso, el cliente ser integrado
+                    para bajar el pedido de venta. Es posible informar al conector padre, cuál es el tipo de ejecución:
+                    si es ejecutado registro a registro o solamente después del último registro integrado al conector
+                    padre o, incluso, si debe seguir en caso de error en el conector padre o no.</p>
+                <div class="screenshot">
+                    <img src="../imgs/telas_n4link/conectorpai.png" alt="Interfaz Conector Padre"
+                        style="width: 100%; max-width: 800px; height: auto;">
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="back-to-top" id="back-to-top" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 14l5-5 5 5z" />
+        </svg>
+    </div>
+
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
