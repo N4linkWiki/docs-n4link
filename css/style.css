@@ -513,7 +513,7 @@ body.dark-theme .theme-toggle:hover {
 }
 
 .theme-toggle .sun-icon::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -522,10 +522,15 @@ body.dark-theme .theme-toggle:hover {
   height: 8px;
   border-radius: 50%;
   background: currentColor;
-  box-shadow: 0 -12px 0 -1px currentColor, 8.5px -8.5px 0 -1px currentColor,
-    12px 0 0 -1px currentColor, 8.5px 8.5px 0 -1px currentColor,
-    0 12px 0 -1px currentColor, -8.5px 8.5px 0 -1px currentColor,
-    -12px 0 0 -1px currentColor, -8.5px -8.5px 0 -1px currentColor;
+  box-shadow: 
+    0 -12px 0 -1px currentColor,
+    8.5px -8.5px 0 -1px currentColor,
+    12px 0 0 -1px currentColor,
+    8.5px 8.5px 0 -1px currentColor,
+    0 12px 0 -1px currentColor,
+    -8.5px 8.5px 0 -1px currentColor,
+    -12px 0 0 -1px currentColor,
+    -8.5px -8.5px 0 -1px currentColor;
 }
 
 /* Lua minimalista para tema escuro */
@@ -534,7 +539,7 @@ body.dark-theme .theme-toggle:hover {
 }
 
 .theme-toggle .moon-icon::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -706,7 +711,7 @@ body.dark-theme .language-option:hover {
 }
 
 .fi-br::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -719,7 +724,7 @@ body.dark-theme .language-option:hover {
 }
 
 .fi-br::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -727,7 +732,10 @@ body.dark-theme .language-option:hover {
   width: 12px;
   height: 1px;
   background: #00306b;
-  box-shadow: 0 -2px 0 0 #00306b, 0 2px 0 0 #00306b, -3px -1px 0 0 #00306b,
+  box-shadow: 
+    0 -2px 0 0 #00306b,
+    0 2px 0 0 #00306b,
+    -3px -1px 0 0 #00306b,
     3px 1px 0 0 #00306b;
 }
 
@@ -777,11 +785,7 @@ body.dark-theme .language-option:hover {
 /* === SECTION SEPARATOR (substitui o hero nas outras seções) === */
 .section-separator {
   margin-top: 140px;
-  background: linear-gradient(
-    135deg,
-    rgba(102, 126, 234, 0.05) 0%,
-    rgba(118, 75, 162, 0.05) 100%
-  );
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
   border-bottom: 1px solid rgba(102, 126, 234, 0.1);
   padding: 2rem 0;
   position: relative;
@@ -944,6 +948,11 @@ body:has(#welcome.content-section.active) .main-container {
   letter-spacing: 1px;
   margin-bottom: 1rem;
 }
+
+  html {
+    scroll-behavior: auto;
+  }
+
 
 /* === SIDEBAR === */
 .sidebar {
@@ -1578,10 +1587,7 @@ a:focus-visible {
   }
 
   .sidebar {
-    position: static;
-    order: 2;
-    animation: slideInFromRight 0.6s ease-out;
-    top: auto;
+    display: none; /* Esconder sidebar no mobile quando hamburger está ativo */
   }
 
   .content {
