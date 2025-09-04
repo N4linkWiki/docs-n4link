@@ -501,10 +501,53 @@ body.dark-theme .theme-toggle:hover {
 }
 
 .theme-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
   transition: all 0.3s ease;
+}
+
+/* Sol minimalista para tema claro */
+.theme-toggle .sun-icon {
+  position: relative;
+}
+
+.theme-toggle .sun-icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 -12px 0 -1px currentColor, 8.5px -8.5px 0 -1px currentColor,
+    12px 0 0 -1px currentColor, 8.5px 8.5px 0 -1px currentColor,
+    0 12px 0 -1px currentColor, -8.5px 8.5px 0 -1px currentColor,
+    -12px 0 0 -1px currentColor, -8.5px -8.5px 0 -1px currentColor;
+}
+
+/* Lua minimalista para tema escuro */
+.theme-toggle .moon-icon {
+  position: relative;
+}
+
+.theme-toggle .moon-icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: inset 4px -2px 0 0 #334155;
+}
+
+body.dark-theme .theme-toggle .moon-icon::before {
+  box-shadow: inset 4px -2px 0 0 #334155;
 }
 
 /* === TRADUTOR === */
@@ -655,10 +698,37 @@ body.dark-theme .language-option:hover {
 .fi-br {
   background: linear-gradient(
     to bottom,
-    #009739 33%,
-    #fedd00 33% 66%,
-    #002776 66%
+    #00923f 33%,
+    #fedf00 33% 66%,
+    #00923f 66%
   );
+  position: relative;
+}
+
+.fi-br::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #00306b;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #fedf00;
+}
+
+.fi-br::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  width: 12px;
+  height: 1px;
+  background: #00306b;
+  box-shadow: 0 -2px 0 0 #00306b, 0 2px 0 0 #00306b, -3px -1px 0 0 #00306b,
+    3px 1px 0 0 #00306b;
 }
 
 .fi-pt {
@@ -693,6 +763,15 @@ body.dark-theme .language-option:hover {
   width: 40%;
   height: 53.85%;
   background: #3c3b6e;
+}
+
+.fi-es {
+  background: linear-gradient(
+    to bottom,
+    #aa151b 25%,
+    #f1bf00 25% 75%,
+    #aa151b 75%
+  );
 }
 
 /* === SECTION SEPARATOR (substitui o hero nas outras seções) === */
@@ -864,29 +943,6 @@ body:has(#welcome.content-section.active) .main-container {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 1rem;
-}
-
-.toc-item {
-  display: block;
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.8rem;
-  padding: 0.5rem 0;
-  border-left: 2px solid transparent;
-  padding-left: 1rem;
-  margin-left: -1rem;
-  transition: all 0.2s ease;
-}
-
-.toc-item:hover {
-  color: #667eea;
-  border-left-color: #667eea;
-}
-
-.toc-item.active {
-  color: #667eea;
-  border-left-color: #667eea;
-  font-weight: 600;
 }
 
 /* === SIDEBAR === */
@@ -1713,4 +1769,28 @@ a:focus-visible {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* === TOC === */
+.toc-item {
+  display: block;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 0.5rem 0;
+  border-left: 2px solid transparent;
+  padding-left: 1rem;
+  margin-left: -1rem;
+  transition: all 0.2s ease;
+}
+
+.toc-item:hover {
+  color: #667eea;
+  border-left-color: #667eea;
+}
+
+.toc-item.active {
+  color: #667eea;
+  border-left-color: #667eea;
+  font-weight: 600;
 }

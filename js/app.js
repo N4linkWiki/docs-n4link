@@ -204,7 +204,7 @@ class AdvancedDocumentation {
       .map((heading, index) => {
         const id = `toc-${this.currentSection}-${index}`;
         heading.id = id;
-        return `<a href="#${id}" class="toc-item">${heading.textContent}</a>`;
+        return `<a href="#${id}" class="toc-item" onclick="event.preventDefault(); advancedDocs.scrollToHeading('${id}'); return false;">${heading.textContent}</a>`;
       })
       .join("");
 
@@ -214,16 +214,36 @@ class AdvancedDocumentation {
     this.updateActiveTOCItem(headings);
   }
 
+  scrollToHeading(headingId) {
+    const element = document.getElementById(headingId);
+    if (element) {
+      const headerHeight = 140; // Altura do header fixo + margem
+      const elementPosition =
+        element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }
+
   updateActiveTOCItem(headings) {
     const tocItems = document.querySelectorAll(".toc-item");
-    let activeIndex = 0;
+    let activeIndex = -1;
+    const scrollPosition = window.scrollY + 150; // Offset para o header
 
     headings.forEach((heading, index) => {
-      const rect = heading.getBoundingClientRect();
-      if (rect.top <= 100) {
+      const headingPosition =
+        heading.getBoundingClientRect().top + window.pageYOffset;
+      if (scrollPosition >= headingPosition) {
         activeIndex = index;
       }
     });
+
+    // Se nenhuma seção foi encontrada, ativar a primeira
+    if (activeIndex === -1) activeIndex = 0;
 
     tocItems.forEach((item, index) => {
       item.classList.toggle("active", index === activeIndex);
@@ -354,11 +374,9 @@ class ThemeManager {
     const themeIcon = document.getElementById("theme-icon");
     if (themeIcon) {
       if (this.currentTheme === "light") {
-        themeIcon.innerHTML =
-          '<path d="M20.354 15.354A9 9 0 718.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+        themeIcon.className = "sun-icon";
       } else {
-        themeIcon.innerHTML =
-          '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+        themeIcon.className = "moon-icon";
       }
     }
   }
@@ -366,10 +384,12 @@ class ThemeManager {
 
 // === NAVIGATION SYSTEM ===
 function showSection(sectionId) {
+  // Remove active class from all sections
   document.querySelectorAll(".content-section").forEach((section) => {
     section.classList.remove("active");
   });
 
+  // Add active class to target section
   const targetSection = document.getElementById(sectionId);
   if (targetSection) {
     targetSection.classList.add("active");
@@ -378,6 +398,7 @@ function showSection(sectionId) {
     }
   }
 
+  // Update navigation buttons
   document.querySelectorAll(".nav-links button").forEach((btn) => {
     btn.classList.remove("active");
   });
